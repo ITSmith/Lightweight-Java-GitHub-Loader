@@ -135,6 +135,32 @@ public class TabsController {
 			destNotesArea.setText("");
 		}
 	}
+	
+	/**
+	 * Called when the user clicks the save source button. Opens a dialog to edit
+	 * details for a new source.
+	 */
+	@FXML
+	private void handleSaveSource() {
+	    Source tempSource = new Source(sourceField.getText());
+	    boolean okClicked = main.showSourceEditDialog(tempSource);
+	    if (okClicked) {
+	        main.getSourceData().add(tempSource);
+	    }
+	}
+	
+	/**
+	 * Called when the user clicks the save destination button. Opens a dialog to edit
+	 * details for a new destination.
+	 */
+	@FXML
+	private void handleSaveDestination() {
+		Destination tempDestination = new Destination(destinationField.getText());
+	    boolean okClicked = main.showDestinationEditDialog(tempDestination);
+	    if (okClicked) {
+	        main.getDestinationData().add(tempDestination);
+	    }
+	}
 
 	/**
 	 * Called when the user clicks on the source load button.
