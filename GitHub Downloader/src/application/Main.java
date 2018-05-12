@@ -81,7 +81,7 @@ public class Main extends Application {
 
 			// Show the scene containing the root layout.
 			Scene scene = new Scene(rootLayout);
-			scene.getStylesheets().add(getClass().getResource("css/application.css").toExternalForm());
+			//scene.getStylesheets().add(getClass().getResource("css/DarkTheme.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		} catch (IOException e) {
