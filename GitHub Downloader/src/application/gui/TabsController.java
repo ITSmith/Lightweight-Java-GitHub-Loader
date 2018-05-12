@@ -11,17 +11,21 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 
 public class TabsController {
+	
+	// Download tab IDs
+	@FXML
+	private TextField sourceField;
+	@FXML
+	private TextField destinationField;
+	
+	// Source tab IDs
 	@FXML
 	private TableView<Source> sourceTable;
 	@FXML
 	private TableColumn<Source, String> sourceColumn;
-	@FXML
-	private TableView<Destination> destinationTable;
-	@FXML
-	private TableColumn<Destination, String> destinationColumn;
-
 	@FXML
 	private Label srcIdentifierLbl;
 	@FXML
@@ -34,6 +38,12 @@ public class TabsController {
 	private Label srcLastDownloadedLbl;
 	@FXML
 	private TextArea srcNotesArea;
+	
+	// Destination tab IDs
+	@FXML
+	private TableView<Destination> destinationTable;
+	@FXML
+	private TableColumn<Destination, String> destinationColumn;
 	@FXML
 	private Label destIdentifierLbl;
 	@FXML
@@ -126,6 +136,48 @@ public class TabsController {
 		}
 	}
 
+	/**
+	 * Called when the user clicks on the source load button.
+	 */
+	@FXML
+	private void handleLoadSource() {
+		int selectedIndex = sourceTable.getSelectionModel().getSelectedIndex();
+		if (selectedIndex >= 0) {
+			Source selectedSource = sourceTable.getSelectionModel().getSelectedItem();
+			sourceField.setText(selectedSource.getURL());
+		} else {
+			// Nothing selected.
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.initOwner(main.getPrimaryStage());
+			alert.setTitle("No Selection");
+			alert.setHeaderText("No Source Selected");
+			alert.setContentText("Please select a source in the table.");
+
+			alert.showAndWait();
+		}
+	}
+	
+	/**
+	 * Called when the user clicks on the destination load button.
+	 */
+	@FXML
+	private void handleLoadDestination() {
+		int selectedIndex = destinationTable.getSelectionModel().getSelectedIndex();
+		if (selectedIndex >= 0) {
+			Destination selectedDestination = destinationTable.getSelectionModel().getSelectedItem();
+			destinationField.setText(selectedDestination.getPath());
+		} else {
+			// Nothing selected.
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.initOwner(main.getPrimaryStage());
+			alert.setTitle("No Selection");
+			alert.setHeaderText("No Destination Selected");
+			alert.setContentText("Please select a destination in the table.");
+
+			alert.showAndWait();
+		}
+	}
+	
 	/**
 	 * Called when the user clicks on the source delete button.
 	 */

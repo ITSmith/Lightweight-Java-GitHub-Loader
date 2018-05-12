@@ -25,7 +25,7 @@
                <children>
                   <ToolBar layoutX="1.0" layoutY="44.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
                      <items>
-                        <TextField prefHeight="50.0" prefWidth="500.0" promptText="GitHub URL">
+                        <TextField fx:id="sourceField" prefHeight="50.0" prefWidth="500.0" promptText="GitHub URL">
                            <padding>
                               <Insets left="5.0" right="5.0" />
                            </padding>
@@ -42,7 +42,7 @@
                   </ToolBar>
                   <ToolBar layoutX="1.0" layoutY="142.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="164.0">
                      <items>
-                        <TextField prefHeight="50.0" prefWidth="412.0" promptText="Directory">
+                        <TextField fx:id="destinationField" prefHeight="50.0" prefWidth="412.0" promptText="Directory">
                            <padding>
                               <Insets left="5.0" right="5.0" />
                            </padding>
@@ -94,7 +94,7 @@
                         </TableView>
                         <ToolBar layoutX="78.0" layoutY="287.0" prefWidth="297.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="298.0">
                            <items>
-                              <Button mnemonicParsing="false" prefHeight="50.0" text="Load">
+                              <Button mnemonicParsing="false" onAction="#handleLoadSource" prefHeight="50.0" text="Load">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -169,7 +169,7 @@
                         </TableView>
                         <ToolBar layoutX="56.0" layoutY="303.0" prefWidth="297.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="298.0">
                            <items>
-                              <Button mnemonicParsing="false" prefHeight="50.0" text="Load">
+                              <Button mnemonicParsing="false" onAction="#handleLoadDestination" prefHeight="50.0" text="Load">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
