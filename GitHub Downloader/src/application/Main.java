@@ -15,6 +15,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.control.TabPane;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 
@@ -64,6 +65,8 @@ public class Main extends Application {
 		this.primaryStage.setTitle("LightWeight Java GitHub Loader");
 		setUserAgentStylesheet(STYLESHEET_CASPIAN);
 
+		this.primaryStage.getIcons().add(new Image("file:resources/icons/icon.png"));
+
 		initRootLayout();
 
 		showTabs();
@@ -81,7 +84,7 @@ public class Main extends Application {
 
 			// Show the scene containing the root layout.
 			Scene scene = new Scene(rootLayout);
-			//scene.getStylesheets().add(getClass().getResource("css/DarkTheme.css").toExternalForm());
+			// scene.getStylesheets().add(getClass().getResource("css/DarkTheme.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		} catch (IOException e) {
@@ -109,81 +112,85 @@ public class Main extends Application {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
-	 * Opens a dialog to edit details for the specified source. If the user
-	 * clicks OK, the changes are saved into the provided source object and true
-	 * is returned.
+	 * Opens a dialog to edit details for the specified source. If the user clicks
+	 * OK, the changes are saved into the provided source object and true is
+	 * returned.
 	 * 
-	 * @param source the source object to be edited
+	 * @param source
+	 *            the source object to be edited
 	 * @return true if the user clicked OK, false otherwise.
 	 */
 	public boolean showSourceEditDialog(Source source) {
-	    try {
-	        // Load the fxml file and create a new stage for the popup dialog.
-	        FXMLLoader loader = new FXMLLoader();
-	        loader.setLocation(Main.class.getResource("gui/SourceEditDialog.fxml"));
-	        AnchorPane page = (AnchorPane) loader.load();
+		try {
+			// Load the fxml file and create a new stage for the popup dialog.
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(Main.class.getResource("gui/SourceEditDialog.fxml"));
+			AnchorPane page = (AnchorPane) loader.load();
 
-	        // Create the dialog Stage.
-	        Stage dialogStage = new Stage();
-	        dialogStage.setTitle("Edit Source");
-	        dialogStage.initModality(Modality.WINDOW_MODAL);
-	        dialogStage.initOwner(primaryStage);
-	        Scene scene = new Scene(page);
-	        dialogStage.setScene(scene);
+			// Create the dialog Stage.
+			Stage dialogStage = new Stage();
+			dialogStage.setTitle("Edit Source");
+			dialogStage.getIcons().add(new Image("file:resources/icons/icon.png"));
+			dialogStage.initModality(Modality.WINDOW_MODAL);
+			dialogStage.initOwner(primaryStage);
+			Scene scene = new Scene(page);
+			dialogStage.setScene(scene);
 
-	        // Set the source into the controller.
-	        SourceEditDialogController controller = loader.getController();
-	        controller.setDialogStage(dialogStage);
-	        controller.setSource(source);
+			// Set the source into the controller.
+			SourceEditDialogController controller = loader.getController();
+			controller.setDialogStage(dialogStage);
+			controller.setSource(source);
 
-	        // Show the dialog and wait until the user closes it
-	        dialogStage.showAndWait();
+			// Show the dialog and wait until the user closes it
+			dialogStage.showAndWait();
 
-	        return controller.isOkClicked();
-	    } catch (IOException e) {
-	        e.printStackTrace();
-	        return false;
-	    }
+			return controller.isOkClicked();
+		} catch (IOException e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
-	
+
 	/**
 	 * Opens a dialog to edit details for the specified destination. If the user
-	 * clicks OK, the changes are saved into the provided source object and true
-	 * is returned.
+	 * clicks OK, the changes are saved into the provided source object and true is
+	 * returned.
 	 * 
-	 * @param destination the destination object to be edited
+	 * @param destination
+	 *            the destination object to be edited
 	 * @return true if the user clicked OK, false otherwise.
 	 */
 	public boolean showDestinationEditDialog(Destination destination) {
-	    try {
-	        // Load the fxml file and create a new stage for the popup dialog.
-	        FXMLLoader loader = new FXMLLoader();
-	        loader.setLocation(Main.class.getResource("gui/DestinationEditDialog.fxml"));
-	        AnchorPane page = (AnchorPane) loader.load();
+		try {
+			// Load the fxml file and create a new stage for the popup dialog.
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(Main.class.getResource("gui/DestinationEditDialog.fxml"));
+			AnchorPane page = (AnchorPane) loader.load();
 
-	        // Create the dialog Stage.
-	        Stage dialogStage = new Stage();
-	        dialogStage.setTitle("Edit Destination");
-	        dialogStage.initModality(Modality.WINDOW_MODAL);
-	        dialogStage.initOwner(primaryStage);
-	        Scene scene = new Scene(page);
-	        dialogStage.setScene(scene);
+			// Create the dialog Stage.
+			Stage dialogStage = new Stage();
+			dialogStage.setTitle("Edit Destination");
+			dialogStage.getIcons().add(new Image("file:resources/icons/icon.png"));
+			dialogStage.initModality(Modality.WINDOW_MODAL);
+			dialogStage.initOwner(primaryStage);
+			Scene scene = new Scene(page);
+			dialogStage.setScene(scene);
 
-	        // Set the destination into the controller.
-	        DestinationEditDialogController controller = loader.getController();
-	        controller.setDialogStage(dialogStage);
-	        controller.setDestination(destination);
+			// Set the destination into the controller.
+			DestinationEditDialogController controller = loader.getController();
+			controller.setDialogStage(dialogStage);
+			controller.setDestination(destination);
 
-	        // Show the dialog and wait until the user closes it
-	        dialogStage.showAndWait();
+			// Show the dialog and wait until the user closes it
+			dialogStage.showAndWait();
 
-	        return controller.isOkClicked();
-	    } catch (IOException e) {
-	        e.printStackTrace();
-	        return false;
-	    }
+			return controller.isOkClicked();
+		} catch (IOException e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 	public Stage getPrimaryStage() {
