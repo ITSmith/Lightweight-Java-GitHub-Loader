@@ -33,7 +33,7 @@
                               <Font size="18.0" />
                            </font>
                         </TextField>
-                        <Button mnemonicParsing="false" prefHeight="50.0" text="Save">
+                        <Button mnemonicParsing="false" onAction="#handleSaveSource" prefHeight="50.0" text="Save">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -50,12 +50,12 @@
                               <Font size="18.0" />
                            </font>
                         </TextField>
-                        <Button mnemonicParsing="false" prefHeight="50.0" text="Select">
+                        <Button mnemonicParsing="false" onAction="#handleChooseDestination" prefHeight="50.0" text="Select">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" prefHeight="50.0" text="Save">
+                        <Button mnemonicParsing="false" onAction="#handleSaveDestination" prefHeight="50.0" text="Save">
                            <font>
                               <Font size="18.0" />
                            </font>

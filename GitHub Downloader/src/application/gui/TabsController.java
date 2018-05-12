@@ -1,9 +1,12 @@
 package application.gui;
 
+import java.io.File;
+
 import application.Main;
 import application.objects.Destination;
 import application.objects.Source;
 import application.utils.DateUtil;
+import application.utils.FileUtil;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -14,13 +17,13 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 public class TabsController {
-	
+
 	// Download tab IDs
 	@FXML
 	private TextField sourceField;
 	@FXML
 	private TextField destinationField;
-	
+
 	// Source tab IDs
 	@FXML
 	private TableView<Source> sourceTable;
@@ -38,7 +41,7 @@ public class TabsController {
 	private Label srcLastDownloadedLbl;
 	@FXML
 	private TextArea srcNotesArea;
-	
+
 	// Destination tab IDs
 	@FXML
 	private TableView<Destination> destinationTable;
@@ -135,31 +138,44 @@ public class TabsController {
 			destNotesArea.setText("");
 		}
 	}
-	
+
+	@FXML
+	private void handleChooseDestination() {
+		String path = destinationField.getText();
+		File tempFile;
+		if (path == null || path.length() == 0) {
+			tempFile = FileUtil.chooseDirectory(main.getPrimaryStage());
+		} else {
+			tempFile = FileUtil.chooseDirectory(main.getPrimaryStage(), path);
+		}
+		if (tempFile != null) path = tempFile.getPath();
+		destinationField.setText(path);
+	}
+
 	/**
 	 * Called when the user clicks the save source button. Opens a dialog to edit
 	 * details for a new source.
 	 */
 	@FXML
 	private void handleSaveSource() {
-	    Source tempSource = new Source(sourceField.getText());
-	    boolean okClicked = main.showSourceEditDialog(tempSource);
-	    if (okClicked) {
-	        main.getSourceData().add(tempSource);
-	    }
+		Source tempSource = new Source(sourceField.getText());
+		boolean okClicked = main.showSourceEditDialog(tempSource);
+		if (okClicked) {
+			main.getSourceData().add(tempSource);
+		}
 	}
-	
+
 	/**
-	 * Called when the user clicks the save destination button. Opens a dialog to edit
-	 * details for a new destination.
+	 * Called when the user clicks the save destination button. Opens a dialog to
+	 * edit details for a new destination.
 	 */
 	@FXML
 	private void handleSaveDestination() {
 		Destination tempDestination = new Destination(destinationField.getText());
-	    boolean okClicked = main.showDestinationEditDialog(tempDestination);
-	    if (okClicked) {
-	        main.getDestinationData().add(tempDestination);
-	    }
+		boolean okClicked = main.showDestinationEditDialog(tempDestination);
+		if (okClicked) {
+			main.getDestinationData().add(tempDestination);
+		}
 	}
 
 	/**
@@ -182,7 +198,7 @@ public class TabsController {
 			alert.showAndWait();
 		}
 	}
-	
+
 	/**
 	 * Called when the user clicks on the destination load button.
 	 */
@@ -203,7 +219,7 @@ public class TabsController {
 			alert.showAndWait();
 		}
 	}
-	
+
 	/**
 	 * Called when the user clicks on the source delete button.
 	 */
@@ -243,18 +259,18 @@ public class TabsController {
 			alert.showAndWait();
 		}
 	}
-	
+
 	/**
 	 * Called when the user clicks the new source button. Opens a dialog to edit
 	 * details for a new source.
 	 */
 	@FXML
 	private void handleNewSource() {
-	    Source tempSource = new Source();
-	    boolean okClicked = main.showSourceEditDialog(tempSource);
-	    if (okClicked) {
-	        main.getSourceData().add(tempSource);
-	    }
+		Source tempSource = new Source();
+		boolean okClicked = main.showSourceEditDialog(tempSource);
+		if (okClicked) {
+			main.getSourceData().add(tempSource);
+		}
 	}
 
 	/**
@@ -263,60 +279,60 @@ public class TabsController {
 	 */
 	@FXML
 	private void handleEditSource() {
-	    Source selectedSource = sourceTable.getSelectionModel().getSelectedItem();
-	    if (selectedSource != null) {
-	        boolean okClicked = main.showSourceEditDialog(selectedSource);
-	        if (okClicked) {
-	            showSourceDetails(selectedSource);
-	        }
+		Source selectedSource = sourceTable.getSelectionModel().getSelectedItem();
+		if (selectedSource != null) {
+			boolean okClicked = main.showSourceEditDialog(selectedSource);
+			if (okClicked) {
+				showSourceDetails(selectedSource);
+			}
 
-	    } else {
-	        // Nothing selected.
-	        Alert alert = new Alert(AlertType.WARNING);
-	        alert.initOwner(main.getPrimaryStage());
-	        alert.setTitle("No Selection");
-	        alert.setHeaderText("No Source Selected");
-	        alert.setContentText("Please select a source in the table.");
+		} else {
+			// Nothing selected.
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.initOwner(main.getPrimaryStage());
+			alert.setTitle("No Selection");
+			alert.setHeaderText("No Source Selected");
+			alert.setContentText("Please select a source in the table.");
 
-	        alert.showAndWait();
-	    }
+			alert.showAndWait();
+		}
 	}
-	
+
 	/**
-	 * Called when the user clicks the new destination button. Opens a dialog to edit
-	 * details for a new destination.
+	 * Called when the user clicks the new destination button. Opens a dialog to
+	 * edit details for a new destination.
 	 */
 	@FXML
 	private void handleNewDestination() {
-	    Destination tempDestination = new Destination();
-	    boolean okClicked = main.showDestinationEditDialog(tempDestination);
-	    if (okClicked) {
-	        main.getDestinationData().add(tempDestination);
-	    }
+		Destination tempDestination = new Destination();
+		boolean okClicked = main.showDestinationEditDialog(tempDestination);
+		if (okClicked) {
+			main.getDestinationData().add(tempDestination);
+		}
 	}
 
 	/**
-	 * Called when the user clicks the edit destination button. Opens a dialog to edit
-	 * details for the selected destination.
+	 * Called when the user clicks the edit destination button. Opens a dialog to
+	 * edit details for the selected destination.
 	 */
 	@FXML
 	private void handleEditDestination() {
 		Destination selectedDestination = destinationTable.getSelectionModel().getSelectedItem();
-	    if (selectedDestination != null) {
-	        boolean okClicked = main.showDestinationEditDialog(selectedDestination);
-	        if (okClicked) {
-	            showDestinationDetails(selectedDestination);
-	        }
+		if (selectedDestination != null) {
+			boolean okClicked = main.showDestinationEditDialog(selectedDestination);
+			if (okClicked) {
+				showDestinationDetails(selectedDestination);
+			}
 
-	    } else {
-	        // Nothing selected.
-	        Alert alert = new Alert(AlertType.WARNING);
-	        alert.initOwner(main.getPrimaryStage());
-	        alert.setTitle("No Selection");
-	        alert.setHeaderText("No Destination Selected");
-	        alert.setContentText("Please select a destination in the table.");
+		} else {
+			// Nothing selected.
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.initOwner(main.getPrimaryStage());
+			alert.setTitle("No Selection");
+			alert.setHeaderText("No Destination Selected");
+			alert.setContentText("Please select a destination in the table.");
 
-	        alert.showAndWait();
-	    }
+			alert.showAndWait();
+		}
 	}
 }

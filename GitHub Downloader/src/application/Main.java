@@ -171,7 +171,7 @@ public class Main extends Application {
 	        Scene scene = new Scene(page);
 	        dialogStage.setScene(scene);
 
-	        // Set the source into the controller.
+	        // Set the destination into the controller.
 	        DestinationEditDialogController controller = loader.getController();
 	        controller.setDialogStage(dialogStage);
 	        controller.setDestination(destination);
