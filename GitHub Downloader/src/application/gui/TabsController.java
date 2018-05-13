@@ -377,6 +377,7 @@ public class TabsController {
 	private void handleSaveData() {
 		File dataFile = main.getDataFilePath();
 		if (dataFile != null) {
+			
 			main.saveDataToFile(dataFile);
 		} else {
 			handleSaveDataAs();

@@ -2,6 +2,9 @@ package application.model;
 
 import java.time.LocalDate;
 
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import application.utils.LocalDateAdapter;
 import application.utils.StringUtil;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -64,6 +67,7 @@ public class Destination {
 		return notes;
 	}
 
+	@XmlJavaTypeAdapter(LocalDateAdapter.class)
 	public LocalDate getDateAdded() {
 		return dateAdded.get();
 	}

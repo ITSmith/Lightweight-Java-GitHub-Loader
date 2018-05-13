@@ -2,7 +2,6 @@ package application;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.prefs.Preferences;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
@@ -36,18 +35,13 @@ public class Main extends Application {
 	private ObservableList<Source> sourceData = FXCollections.observableArrayList();
 	private ObservableList<Destination> destinationData = FXCollections.observableArrayList();
 
+	// Set the default data path
+	private String dataPath;// = System.getProperty("user.dir") + "Data.xml";
+	
 	public Main() {
 		// Sample data
-		sourceData.add(new Source("https://github.com/beetbox/beets/blob/master/beetsplug/__init__.py"));
-		sourceData.add(new Source("https://raw.githubusercontent.com/beetbox/beets/master/beetsplug/__init__.py"));
-		sourceData.add(new Source("https://github.com/beetbox/beets/blob/master/.gitignore"));
-		sourceData.add(new Source("https://raw.githubusercontent.com/beetbox/beets/master/.gitignore"));
-		sourceData.add(new Source("https://github.com/beetbox/beets/blob/master/README.rst"));
-		sourceData.add(new Source("https://raw.githubusercontent.com/beetbox/beets/master/README.rst"));
-		destinationData.add(new Destination("D:/Music/Andre Rieu/Christmas Classics"));
-		destinationData.add(new Destination("D:/Music/Andre Rieu/Christmas Classics/"));
-		destinationData.add(new Destination("D:/"));
-		destinationData.add(new Destination("D:"));
+		sourceData.add(new Source("https://github.com/ITSmith/Lightweight-Java-GitHub-Loader"));
+		destinationData.add(new Destination(System.getProperty("user.dir")));
 	}
 
 	/**
@@ -206,40 +200,20 @@ public class Main extends Application {
 		return primaryStage;
 	}
 
-	/**
-	 * Returns the data file preference, i.e. the file that was last opened. The
-	 * preference is read from the OS specific registry. If no such preference can
-	 * be found, null is returned.
-	 * 
-	 * @return
-	 */
 	public File getDataFilePath() {
-		Preferences prefs = Preferences.userNodeForPackage(Main.class);
-		String filePath = prefs.get("filePath", null);
-		if (filePath != null) {
-			return new File(filePath);
+		if (dataPath != null) {
+			return new File(dataPath);
 		} else {
 			return null;
 		}
 	}
 
-	/**
-	 * Sets the file path of the currently loaded file. The path is persisted in the
-	 * OS specific registry.
-	 * 
-	 * @param file
-	 *            the file or null to remove the path
-	 */
 	public void setDataFilePath(File file) {
-		Preferences prefs = Preferences.userNodeForPackage(Main.class);
 		if (file != null) {
-			prefs.put("filePath", file.getPath());
-
+			dataPath = file.getPath();
 			// Update the stage title.
 			primaryStage.setTitle("LightWeight Java GitHub Loader - " + file.getName());
 		} else {
-			prefs.remove("filePath");
-
 			// Update the stage title.
 			primaryStage.setTitle("LightWeight Java GitHub Loader");
 		}
@@ -290,7 +264,7 @@ public class Main extends Application {
 			// Wrapping our person data.
 			DataWrapper wrapper = new DataWrapper();
 			wrapper.setSources(sourceData);
-			wrapper.setSources(sourceData);
+			wrapper.setDestinations(destinationData);
 
 			// Marshalling and saving XML to the file.
 			m.marshal(wrapper, file);
@@ -298,6 +272,7 @@ public class Main extends Application {
 			// Save the file path to the registry.
 			setDataFilePath(file);
 		} catch (Exception e) { // catches ANY exception
+			e.printStackTrace();
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Error");
 			alert.setHeaderText("Could not save data");

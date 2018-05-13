@@ -3,11 +3,13 @@ package application.model;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * Helper class to wrap a list of sources and destinations. This is used for saving the
  * lists to XML.
  */
+@XmlRootElement(name = "data")
 public class DataWrapper {
 	private List<Source> sources;
 	private List<Destination> destinations;
