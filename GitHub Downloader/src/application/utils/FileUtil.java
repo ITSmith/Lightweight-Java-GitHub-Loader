@@ -5,6 +5,8 @@ import java.io.File;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 
 public class FileUtil {
@@ -34,5 +36,25 @@ public class FileUtil {
 			alert.showAndWait();
 			return null;
 		}
+	}
+
+	public static File openXML(Stage stage) {
+		FileChooser fileChooser = new FileChooser();
+
+		// Set extension filter
+		ExtensionFilter extFilter = new FileChooser.ExtensionFilter("XML files (*.xml)", "*.xml");
+		fileChooser.getExtensionFilters().add(extFilter);
+		// Show open file dialog
+		return fileChooser.showOpenDialog(stage);
+	}
+
+	public static File saveXML(Stage stage) {
+		FileChooser fileChooser = new FileChooser();
+
+		// Set extension filter
+		ExtensionFilter extFilter = new FileChooser.ExtensionFilter("XML files (*.xml)", "*.xml");
+		fileChooser.getExtensionFilters().add(extFilter);
+		// Show save file dialog
+		return fileChooser.showSaveDialog(stage);
 	}
 }

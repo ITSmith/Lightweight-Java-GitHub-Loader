@@ -2,7 +2,7 @@ package application.gui;
 
 import java.time.LocalDate;
 
-import application.objects.Destination;
+import application.model.Destination;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;

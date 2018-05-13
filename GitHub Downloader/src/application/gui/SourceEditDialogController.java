@@ -2,14 +2,13 @@ package application.gui;
 
 import java.time.LocalDate;
 
-import application.objects.Source;
+import application.model.Source;
 import application.utils.StringUtil;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class SourceEditDialogController {

@@ -3,8 +3,8 @@ package application.gui;
 import java.io.File;
 
 import application.Main;
-import application.objects.Destination;
-import application.objects.Source;
+import application.model.Destination;
+import application.model.Source;
 import application.utils.DateUtil;
 import application.utils.FileUtil;
 import javafx.fxml.FXML;
@@ -24,7 +24,7 @@ public class TabsController {
 	@FXML
 	private TextField destinationField;
 
-	// Source tab IDs
+	// Source Tab IDs
 	@FXML
 	private TableView<Source> sourceTable;
 	@FXML
@@ -42,7 +42,7 @@ public class TabsController {
 	@FXML
 	private TextArea srcNotesArea;
 
-	// Destination tab IDs
+	// Destination Tab IDs
 	@FXML
 	private TableView<Destination> destinationTable;
 	@FXML
@@ -56,6 +56,8 @@ public class TabsController {
 	@FXML
 	private TextArea destNotesArea;
 
+	
+	
 	// Reference to the main application.
 	private Main main;
 
@@ -101,56 +103,7 @@ public class TabsController {
 		destinationTable.setItems(main.getDestinationData());
 	}
 
-	private void showSourceDetails(Source source) {
-		if (source != null) {
-			// Fill the labels with info from the source object.
-			srcIdentifierLbl.setText(source.getIdentifier());
-			srcFileLbl.setText(source.getFile());
-			srcURLLbl.setText(source.getURL());
-			srcNotesArea.setText(source.getNotes());
-
-			srcDateAddedLbl.setText(DateUtil.dateToString(source.getDateAdded()));
-			srcLastDownloadedLbl.setText(DateUtil.dateToString(source.getLastDownloaded()));
-		} else {
-			// Source is null, remove all the text.
-			srcIdentifierLbl.setText("");
-			srcFileLbl.setText("");
-			srcURLLbl.setText("");
-			srcDateAddedLbl.setText("");
-			srcLastDownloadedLbl.setText("");
-			srcNotesArea.setText("");
-		}
-	}
-
-	private void showDestinationDetails(Destination destination) {
-		if (destination != null) {
-			// Fill the labels with info from the destination object.
-			destIdentifierLbl.setText(destination.getIdentifier());
-			destPathLbl.setText(destination.getPath());
-			destNotesArea.setText(destination.getNotes());
-
-			destDateAddedLbl.setText(DateUtil.dateToString(destination.getDateAdded()));
-		} else {
-			// Destination is null, remove all the text.
-			destIdentifierLbl.setText("");
-			destPathLbl.setText("");
-			destDateAddedLbl.setText("");
-			destNotesArea.setText("");
-		}
-	}
-
-	@FXML
-	private void handleChooseDestination() {
-		String path = destinationField.getText();
-		File tempFile;
-		if (path == null || path.length() == 0) {
-			tempFile = FileUtil.chooseDirectory(main.getPrimaryStage());
-		} else {
-			tempFile = FileUtil.chooseDirectory(main.getPrimaryStage(), path);
-		}
-		if (tempFile != null) path = tempFile.getPath();
-		destinationField.setText(path);
-	}
+	// === Download Tab ===
 
 	/**
 	 * Called when the user clicks the save source button. Opens a dialog to edit
@@ -178,6 +131,43 @@ public class TabsController {
 		}
 	}
 
+	@FXML
+	private void handleChooseDestination() {
+		String path = destinationField.getText();
+		File tempFile;
+		if (path == null || path.length() == 0) {
+			tempFile = FileUtil.chooseDirectory(main.getPrimaryStage());
+		} else {
+			tempFile = FileUtil.chooseDirectory(main.getPrimaryStage(), path);
+		}
+		if (tempFile != null)
+			path = tempFile.getPath();
+		destinationField.setText(path);
+	}
+
+	// === Source Tab ===
+
+	private void showSourceDetails(Source source) {
+		if (source != null) {
+			// Fill the labels with info from the source object.
+			srcIdentifierLbl.setText(source.getIdentifier());
+			srcFileLbl.setText(source.getFile());
+			srcURLLbl.setText(source.getURL());
+			srcNotesArea.setText(source.getNotes());
+
+			srcDateAddedLbl.setText(DateUtil.dateToString(source.getDateAdded()));
+			srcLastDownloadedLbl.setText(DateUtil.dateToString(source.getLastDownloaded()));
+		} else {
+			// Source is null, remove all the text.
+			srcIdentifierLbl.setText("");
+			srcFileLbl.setText("");
+			srcURLLbl.setText("");
+			srcDateAddedLbl.setText("");
+			srcLastDownloadedLbl.setText("");
+			srcNotesArea.setText("");
+		}
+	}
+
 	/**
 	 * Called when the user clicks on the source load button.
 	 */
@@ -200,27 +190,6 @@ public class TabsController {
 	}
 
 	/**
-	 * Called when the user clicks on the destination load button.
-	 */
-	@FXML
-	private void handleLoadDestination() {
-		int selectedIndex = destinationTable.getSelectionModel().getSelectedIndex();
-		if (selectedIndex >= 0) {
-			Destination selectedDestination = destinationTable.getSelectionModel().getSelectedItem();
-			destinationField.setText(selectedDestination.getPath());
-		} else {
-			// Nothing selected.
-			Alert alert = new Alert(AlertType.WARNING);
-			alert.initOwner(main.getPrimaryStage());
-			alert.setTitle("No Selection");
-			alert.setHeaderText("No Destination Selected");
-			alert.setContentText("Please select a destination in the table.");
-
-			alert.showAndWait();
-		}
-	}
-
-	/**
 	 * Called when the user clicks on the source delete button.
 	 */
 	@FXML
@@ -235,26 +204,6 @@ public class TabsController {
 			alert.setTitle("No Selection");
 			alert.setHeaderText("No Source Selected");
 			alert.setContentText("Please select a source in the table.");
-
-			alert.showAndWait();
-		}
-	}
-
-	/**
-	 * Called when the user clicks on the destination delete button.
-	 */
-	@FXML
-	private void handleDeleteDestination() {
-		int selectedIndex = destinationTable.getSelectionModel().getSelectedIndex();
-		if (selectedIndex >= 0) {
-			destinationTable.getItems().remove(selectedIndex);
-		} else {
-			// Nothing selected.
-			Alert alert = new Alert(AlertType.WARNING);
-			alert.initOwner(main.getPrimaryStage());
-			alert.setTitle("No Selection");
-			alert.setHeaderText("No Destination Selected");
-			alert.setContentText("Please select a destination in the table.");
 
 			alert.showAndWait();
 		}
@@ -298,6 +247,66 @@ public class TabsController {
 		}
 	}
 
+	// === Destination Tab ===
+
+	private void showDestinationDetails(Destination destination) {
+		if (destination != null) {
+			// Fill the labels with info from the destination object.
+			destIdentifierLbl.setText(destination.getIdentifier());
+			destPathLbl.setText(destination.getPath());
+			destNotesArea.setText(destination.getNotes());
+
+			destDateAddedLbl.setText(DateUtil.dateToString(destination.getDateAdded()));
+		} else {
+			// Destination is null, remove all the text.
+			destIdentifierLbl.setText("");
+			destPathLbl.setText("");
+			destDateAddedLbl.setText("");
+			destNotesArea.setText("");
+		}
+	}
+
+	/**
+	 * Called when the user clicks on the destination load button.
+	 */
+	@FXML
+	private void handleLoadDestination() {
+		int selectedIndex = destinationTable.getSelectionModel().getSelectedIndex();
+		if (selectedIndex >= 0) {
+			Destination selectedDestination = destinationTable.getSelectionModel().getSelectedItem();
+			destinationField.setText(selectedDestination.getPath());
+		} else {
+			// Nothing selected.
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.initOwner(main.getPrimaryStage());
+			alert.setTitle("No Selection");
+			alert.setHeaderText("No Destination Selected");
+			alert.setContentText("Please select a destination in the table.");
+
+			alert.showAndWait();
+		}
+	}
+
+	/**
+	 * Called when the user clicks on the destination delete button.
+	 */
+	@FXML
+	private void handleDeleteDestination() {
+		int selectedIndex = destinationTable.getSelectionModel().getSelectedIndex();
+		if (selectedIndex >= 0) {
+			destinationTable.getItems().remove(selectedIndex);
+		} else {
+			// Nothing selected.
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.initOwner(main.getPrimaryStage());
+			alert.setTitle("No Selection");
+			alert.setHeaderText("No Destination Selected");
+			alert.setContentText("Please select a destination in the table.");
+
+			alert.showAndWait();
+		}
+	}
+
 	/**
 	 * Called when the user clicks the new destination button. Opens a dialog to
 	 * edit details for a new destination.
@@ -334,5 +343,73 @@ public class TabsController {
 
 			alert.showAndWait();
 		}
+	}
+
+	// === Settings Tab ===
+
+	/**
+	 * Deletes all Data.
+	 */
+	@FXML
+	private void handleNewData() {
+		main.getSourceData().clear();
+		main.getDestinationData().clear();
+		main.setDataFilePath(null);
+	}
+
+	/**
+	 * Opens a FileChooser to let the user select data to load.
+	 */
+	@FXML
+	private void handleOpenData() {
+		File file = FileUtil.openXML(main.getPrimaryStage());
+
+		if (file != null) {
+			main.loadDataFromFile(file);
+		}
+	}
+
+	/**
+	 * Saves the data to the file that is currently open. If there is no open file,
+	 * the "save as" dialog is shown.
+	 */
+	@FXML
+	private void handleSaveData() {
+		File dataFile = main.getDataFilePath();
+		if (dataFile != null) {
+			main.saveDataToFile(dataFile);
+		} else {
+			handleSaveDataAs();
+		}
+	}
+
+	/**
+	 * Opens a FileChooser to let the user select a file to save to.
+	 */
+	@FXML
+	private void handleSaveDataAs() {
+		File file = FileUtil.saveXML(main.getPrimaryStage());
+
+		if (file != null) {
+			// Make sure it has the correct extension
+			if (!file.getPath().endsWith(".xml")) {
+				file = new File(file.getPath() + ".xml");
+			}
+			main.saveDataToFile(file);
+		}
+	}
+
+	/**
+	 * Opens an about dialog.
+	 */
+	@FXML
+	private void handleAbout() {
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle("LightWeight Java GitHub Loader");
+		alert.setHeaderText("About");
+		alert.setContentText(
+				"Author: Ian Smith\nGitHub Repository: https://github.com/ITSmith/Lightweight-Java-GitHub-Loader");
+
+		alert.showAndWait();
 	}
 }

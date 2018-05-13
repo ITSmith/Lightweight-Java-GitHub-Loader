@@ -220,9 +220,36 @@
             </SplitPane>
          </content>
       </Tab>
-      <Tab text="Settings">
+      <Tab text="Settingsa">
          <content>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <ToolBar prefWidth="297.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                     <items>
+                        <Button mnemonicParsing="false" onAction="#handleOpenData" prefHeight="50.0" text="Open Data File">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Button>
+                        <Button mnemonicParsing="false" onAction="#handleNewData" prefHeight="50.0" text="New Data File">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Button>
+                        <Button mnemonicParsing="false" onAction="#handleSaveData" prefHeight="50.0" text="Save Data File">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Button>
+                        <Button mnemonicParsing="false" onAction="#handleAbout" prefHeight="50.0" text="About">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Button>
+                     </items>
+                  </ToolBar>
+               </children>
+            </AnchorPane>
          </content>
       </Tab>
   </tabs>
