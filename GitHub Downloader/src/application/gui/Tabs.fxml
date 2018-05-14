@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.152" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.gui.TabsController">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.gui.TabsController">
   <tabs>
     <Tab text="Download">
       <content>
@@ -25,7 +25,7 @@
                <children>
                   <ToolBar layoutX="1.0" layoutY="44.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
                      <items>
-                        <TextField fx:id="sourceField" prefHeight="50.0" prefWidth="500.0" promptText="GitHub URL">
+                        <TextField fx:id="sourceField" prefHeight="50.0" prefWidth="520.0" promptText="GitHub URL">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -39,7 +39,7 @@
                   </ToolBar>
                   <ToolBar layoutX="1.0" layoutY="142.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="164.0">
                      <items>
-                        <TextField fx:id="destinationField" prefHeight="50.0" prefWidth="415.0" promptText="Directory">
+                        <TextField fx:id="destinationField" prefHeight="50.0" prefWidth="445.0" promptText="Directory">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -72,6 +72,21 @@
                         <Font size="36.0" />
                      </font>
                   </Label>
+                  <Button layoutX="21.0" layoutY="307.0" mnemonicParsing="false" onAction="#handleChooseDestination" prefHeight="50.0" text="Download" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+                     <font>
+                        <Font name="System Bold" size="36.0" />
+                     </font>
+                  </Button>
+                  <Label layoutX="238.0" layoutY="241.0" text="Status:" AnchorPane.bottomAnchor="105.0" AnchorPane.leftAnchor="20.0">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="100.0" layoutY="240.0" text="Label" AnchorPane.bottomAnchor="105.0" AnchorPane.leftAnchor="100.0">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
                </children></AnchorPane>
       </content>
     </Tab>
@@ -81,12 +96,12 @@
               <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                      <children>
-                        <TableView fx:id="sourceTable" layoutX="21.0" layoutY="-10.0" AnchorPane.bottomAnchor="64.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <TableView fx:id="sourceTable" layoutX="21.0" layoutY="-10.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                           <columns>
                               <TableColumn fx:id="sourceColumn" prefWidth="300.0" text="Source" />
                           </columns>
                         </TableView>
-                        <ToolBar layoutX="78.0" layoutY="287.0" prefWidth="297.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="298.0">
+                        <ToolBar layoutX="78.0" layoutY="287.0" prefWidth="297.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                            <items>
                               <Button mnemonicParsing="false" onAction="#handleLoadSource" prefHeight="50.0" text="Load">
                                  <font>
@@ -109,7 +124,7 @@
                   </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                      <children>
-                        <GridPane layoutX="48.0" layoutY="45.0" AnchorPane.bottomAnchor="200.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+                        <GridPane layoutX="48.0" layoutY="45.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
                           <columnConstraints>
                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="60.0" />
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -134,7 +149,7 @@
                               <Label fx:id="srcLastDownloadedLbl" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                            </children>
                         </GridPane>
-                        <ToolBar layoutX="-112.0" layoutY="317.0" prefWidth="297.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="298.0">
+                        <ToolBar layoutX="-112.0" layoutY="317.0" prefWidth="297.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                            <items>
                               <Button mnemonicParsing="false" onAction="#handleEditSource" prefHeight="50.0" text="Edit">
                                  <font>
@@ -143,7 +158,7 @@
                               </Button>
                            </items>
                         </ToolBar>
-                        <TextArea fx:id="srcNotesArea" editable="false" focusTraversable="false" layoutY="130.0" prefHeight="200.0" prefWidth="200.0" promptText="No Notes" wrapText="true" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="175.0" />
+                        <TextArea fx:id="srcNotesArea" editable="false" focusTraversable="false" layoutY="130.0" prefHeight="150.0" prefWidth="200.0" promptText="No Notes" wrapText="true" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="161.0" />
                      </children>
                   </AnchorPane>
               </items>
@@ -156,12 +171,12 @@
                <items>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                      <children>
-                        <TableView fx:id="destinationTable" layoutX="21.0" layoutY="-10.0" AnchorPane.bottomAnchor="64.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <TableView fx:id="destinationTable" layoutX="21.0" layoutY="-10.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <columns>
                               <TableColumn fx:id="destinationColumn" prefWidth="300.0" text="Destination" />
                            </columns>
                         </TableView>
-                        <ToolBar layoutX="56.0" layoutY="303.0" prefWidth="297.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="298.0">
+                        <ToolBar layoutX="56.0" layoutY="303.0" prefWidth="297.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                            <items>
                               <Button mnemonicParsing="false" onAction="#handleLoadDestination" prefHeight="50.0" text="Load">
                                  <font>
@@ -184,7 +199,7 @@
                   </AnchorPane>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                      <children>
-                        <GridPane layoutX="38.0" layoutY="91.0" AnchorPane.bottomAnchor="200.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+                        <GridPane layoutX="38.0" layoutY="91.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
                           <columnConstraints>
                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="60.0" />
                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -204,7 +219,7 @@
                            </children>
                         </GridPane>
                         <Label fx:id="destNotesLbl" alignment="TOP_LEFT" prefHeight="186.0" prefWidth="287.0" text="Label" wrapText="true" AnchorPane.bottomAnchor="64.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="175.0" />
-                        <ToolBar layoutX="49.0" layoutY="273.0" prefWidth="297.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="298.0">
+                        <ToolBar layoutX="49.0" layoutY="273.0" prefWidth="297.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                            <items>
                               <Button mnemonicParsing="false" onAction="#handleEditDestination" prefHeight="50.0" text="Edit">
                                  <font>
@@ -213,7 +228,7 @@
                               </Button>
                            </items>
                         </ToolBar>
-                        <TextArea fx:id="destNotesArea" editable="false" focusTraversable="false" prefHeight="200.0" prefWidth="200.0" promptText="No Notes" wrapText="true" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="175.0" />
+                        <TextArea fx:id="destNotesArea" editable="false" focusTraversable="false" prefHeight="200.0" prefWidth="200.0" promptText="No Notes" wrapText="true" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="161.0" />
                      </children>
                   </AnchorPane>
                </items>
