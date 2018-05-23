@@ -40,6 +40,7 @@ public class Main extends Application {
 	
 	public Main() {
 		// Sample data
+		sourceData.add(new Source("https://github.com/ITSmith/Lightweight-Java-GitHub-Loader/blob/master/README.md"));
 		sourceData.add(new Source("https://github.com/ITSmith/Lightweight-Java-GitHub-Loader"));
 		destinationData.add(new Destination(System.getProperty("user.dir")));
 	}
@@ -65,7 +66,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		this.primaryStage = primaryStage;
-		this.primaryStage.setTitle("LightWeight Java GitHub Loader");
+		this.primaryStage.setTitle("Targeted Java GitHub Downloader");
 		setUserAgentStylesheet(STYLESHEET_CASPIAN);
 
 		this.primaryStage.getIcons().add(new Image("file:resources/icons/icon.png"));

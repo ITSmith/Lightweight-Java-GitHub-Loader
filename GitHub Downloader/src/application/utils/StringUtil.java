@@ -1,9 +1,13 @@
 package application.utils;
 
 public class StringUtil {
-
-	public static String[] splitStringBy(String str, String splitBy) {
-		return str.split(splitBy, 0);
+	
+	public static String concatWith(String[] strArr, String spacer) {
+		String concat = "";
+		for(String str : strArr) {
+			concat += spacer + str;
+		}
+		return concat;
 	}
 
 	public static String getFolderFromPath(String path) {

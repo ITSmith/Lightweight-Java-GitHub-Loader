@@ -1,12 +1,16 @@
 package application.gui;
 
 import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import application.Main;
 import application.model.Destination;
 import application.model.Source;
 import application.utils.DateUtil;
+import application.utils.DownloadUtil;
 import application.utils.FileUtil;
+import application.utils.GitHubObject;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -23,6 +27,8 @@ public class TabsController {
 	private TextField sourceField;
 	@FXML
 	private TextField destinationField;
+	@FXML
+	private Label statusLbl;
 
 	// Source Tab IDs
 	@FXML
@@ -56,8 +62,6 @@ public class TabsController {
 	@FXML
 	private TextArea destNotesArea;
 
-	
-	
 	// Reference to the main application.
 	private Main main;
 
@@ -143,6 +147,48 @@ public class TabsController {
 		if (tempFile != null)
 			path = tempFile.getPath();
 		destinationField.setText(path);
+	}
+
+	@FXML
+	private void handleDownload() {
+		GitHubObject gitObj = new GitHubObject(sourceField.getText());
+		if (sourceField.getText().equals(""))
+			statusLbl.setText("No Source!");
+		else if (destinationField.getText().equals(""))
+			statusLbl.setText("No Destination!");
+		else if (gitObj.getType().equals("blob")) {
+			statusLbl.setText("Downloading File!");
+			try {
+				URL gitURL = new URL(gitObj.getRawURL());
+				File destFile = new File(destinationField.getText() + "\\" + gitObj.getFile());
+				DownloadUtil.download(gitURL, destFile);
+				if (destFile.exists())
+					statusLbl.setText("Download Successful!");
+				else
+					statusLbl.setText("Download Unsuccessful!");
+			} catch (MalformedURLException e) {
+				if (gitObj.getRawURL() == null)
+					statusLbl.setText("No file specified!");
+				else
+					statusLbl.setText("Invalid URL!");
+			}
+		} else {
+			statusLbl.setText("Downloading Repository!");
+			try {
+				URL gitURL = new URL(gitObj.getRepoURL());
+				File destFile = new File(destinationField.getText() + "\\" + gitObj.getRepo() + gitObj.getBranch() + ".zip");
+				DownloadUtil.download(gitURL, destFile);
+				if (destFile.exists())
+					statusLbl.setText("Download Successful!");
+				else
+					statusLbl.setText("Download Unsuccessful!");
+			} catch (MalformedURLException e) {
+				if (gitObj.getRawURL() == null)
+					statusLbl.setText("No file specified!");
+				else
+					statusLbl.setText("Invalid URL!");
+			}
+		}
 	}
 
 	// === Source Tab ===
@@ -377,7 +423,7 @@ public class TabsController {
 	private void handleSaveData() {
 		File dataFile = main.getDataFilePath();
 		if (dataFile != null) {
-			
+
 			main.saveDataToFile(dataFile);
 		} else {
 			handleSaveDataAs();
