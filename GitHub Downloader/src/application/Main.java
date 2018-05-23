@@ -40,7 +40,7 @@ public class Main extends Application {
 	
 	public Main() {
 		// Sample data
-		sourceData.add(new Source("https://github.com/ITSmith/Lightweight-Java-GitHub-Loader/blob/master/README.md"));
+		sourceData.add(new Source("https://github.com/ITSmith/Lightweight-Java-GitHub-Loader/blob/master/Downloader/Downloader.jar"));
 		sourceData.add(new Source("https://github.com/ITSmith/Lightweight-Java-GitHub-Loader"));
 		destinationData.add(new Destination(System.getProperty("user.dir")));
 	}
